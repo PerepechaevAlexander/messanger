@@ -57,9 +57,11 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   }
 
   // Метод для открытия мобильного меню
-  openMobileMenu() {
+  openSidebar() {
     if (this.isMobile) {
       this.sidebarState.toggleMobileOpen();
+    } else {
+      this.sidebarState.toggleCollapsed();
     }
   }
 

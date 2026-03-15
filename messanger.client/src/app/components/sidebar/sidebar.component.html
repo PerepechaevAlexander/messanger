@@ -11,13 +11,6 @@
      [class.mobile-closed]="isMobile && !mobileMenuOpen">
 
   <div class="sidebar-header" *ngIf="!isMobile">
-    <!-- Кнопка сворачивания слева (только для десктопа) -->
-    <button class="toggle-btn"
-            (click)="toggleSidebar()"
-            [title]="isCollapsed ? 'Развернуть' : 'Свернуть'">
-      <span class="toggle-icon">{{ isCollapsed ? '›' : '‹' }}</span>
-    </button>
-
     <!-- Заголовок сайдбара (только на десктопе) -->
     <h3 *ngIf="!isCollapsed">Меню</h3>
   </div>

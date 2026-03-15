@@ -43,35 +43,6 @@
     flex: 1;
   }
 
-/* Кнопка сворачивания/разворачивания */
-.toggle-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: #34495e;
-  border: none;
-  color: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  font-size: 20px;
-  line-height: 1;
-  flex-shrink: 0;
-  order: -1;
-}
-
-  .toggle-btn:hover {
-    background-color: #3498db;
-    transform: scale(1.1);
-  }
-
-.toggle-icon {
-  display: block;
-  transform: translateY(-1px);
-}
-
 /* Навигационное меню */
 .sidebar-nav {
   flex: 1;
