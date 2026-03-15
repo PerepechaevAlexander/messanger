@@ -1,7 +1,8 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Note } from '../../models/note.model';
 import { NotesStateService } from '../../services/notes-state.service';
 import { Subscription } from 'rxjs';
+import { SidebarStateService } from '../../services/sidebar-state.service';
 
 @Component({
   selector: 'app-notes',
@@ -9,7 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.css']
 })
-export class NotesComponent implements OnInit {
+export class NotesComponent implements OnInit, OnDestroy {
   notes: Note[] = [];
   selectedNote: Note | null = null;
   isModalOpen = false;
@@ -18,11 +19,13 @@ export class NotesComponent implements OnInit {
 
   private subscriptions: Subscription[] = [];
 
-  constructor(private notesState: NotesStateService) { } // Добавляем сервис
+  constructor(
+    private notesState: NotesStateService,
+    private sidebarState: SidebarStateService
+  ) { }
 
   ngOnInit() {
     this.loadNotes();
-    this.checkScreenSize();
 
     // Подписываемся на события создания заметки
     this.subscriptions.push(
@@ -30,15 +33,16 @@ export class NotesComponent implements OnInit {
         this.createNote();
       })
     );
+
+    this.subscriptions.push(
+      this.sidebarState.isMobile$.subscribe(isMobile => {
+        this.isMobile = isMobile;
+      })
+    );
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize() {
-    this.checkScreenSize();
-  }
-
-  checkScreenSize() {
-    this.isMobile = window.innerWidth <= 768;
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   loadNotes() {

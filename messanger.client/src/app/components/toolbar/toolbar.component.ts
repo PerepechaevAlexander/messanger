@@ -14,6 +14,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   isSidebarCollapsed = false;
   currentPageTitle = '';
   showAddButton = false;
+  isMobile = false;
 
   private subscriptions: Subscription[] = [];
 
@@ -24,10 +25,15 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    // Подписываемся на состояние сайдбара
     this.subscriptions.push(
       this.sidebarState.collapsed$.subscribe(collapsed => {
         this.isSidebarCollapsed = collapsed;
+      })
+    );
+
+    this.subscriptions.push(
+      this.sidebarState.isMobile$.subscribe(isMobile => {
+        this.isMobile = isMobile;
       })
     );
 
@@ -50,6 +56,13 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
+  // Метод для открытия мобильного меню
+  openMobileMenu() {
+    if (this.isMobile) {
+      this.sidebarState.toggleMobileOpen();
+    }
+  }
+
   onCreateNote() {
     this.notesState.triggerCreateNote();
   }
@@ -70,7 +83,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   }
 
   private updateAddButtonVisibility() {
-    const url = this.router.url;
-    this.showAddButton = url.includes('/notes');
+    this.showAddButton = this.router.url.includes('/notes');
   }
 }

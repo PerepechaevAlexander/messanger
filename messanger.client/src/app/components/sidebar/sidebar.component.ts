@@ -77,11 +77,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize() {
-    this.sidebarState.checkScreenSize();
-  }
-
   toggleSidebar() {
     if (this.isMobile) {
       this.sidebarState.toggleMobileOpen();

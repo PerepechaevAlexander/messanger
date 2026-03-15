@@ -1,13 +1,24 @@
 <div class="toolbar" [class.sidebar-collapsed]="isSidebarCollapsed">
+
+  <!-- Левая часть тулбара -->
   <div class="toolbar-left">
+    <button class="menu-btn mobile-menu-btn"
+            *ngIf="isMobile"
+            (click)="openMobileMenu()"
+            title="Открыть меню">
+      <span class="menu-icon">☰</span>
+    </button>
     <h1 class="page-title">{{ currentPageTitle }}</h1>
   </div>
+
+  <!-- Правая часть тулбара -->
   <div class="toolbar-right">
     <button class="toolbar-add-btn"
-            *ngIf="showAddButton"
+            *ngIf="showAddButton && !isMobile"
             (click)="onCreateNote()"
             title="Создать заметку">
       <span class="plus-icon">+</span>
     </button>
   </div>
+
 </div>
