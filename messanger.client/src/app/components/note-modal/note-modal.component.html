@@ -1,0 +1,41 @@
+<div class="modal-overlay"
+     *ngIf="isOpen"
+     (click)="onOverlayClick($event)"
+     (keyup)="onEscapePress($event)"
+     tabindex="0">
+  <div class="modal-container" [class.edit-mode]="isEditMode">
+    <div class="modal-header">
+      <div class="header-content" [class.edit-mode]="isEditMode">
+        <input *ngIf="isEditMode"
+               type="text"
+               [(ngModel)]="editTitle"
+               class="edit-title-input"
+               placeholder="Заголовок заметки">
+        <h2 *ngIf="!isEditMode">{{ note?.title || 'Новая заметка' }}</h2>
+      </div>
+      <div class="header-actions">
+        <button class="edit-btn"
+                [class.save-mode]="isEditMode"
+                (click)="toggleEditMode()"
+                [title]="isEditMode ? 'Сохранить' : 'Редактировать'"
+                [disabled]="isEditMode && !canSave()">
+          <span class="icon">{{ isEditMode ? '✓' : '✎' }}</span>
+        </button>
+        <button class="close-btn" (click)="close()" title="Закрыть">×</button>
+      </div>
+    </div>
+
+    <div class="modal-content">
+      <textarea *ngIf="isEditMode"
+                [(ngModel)]="editContent"
+                class="edit-content-textarea"
+                placeholder="Содержание заметки..."
+                rows="10"></textarea>
+      <p *ngIf="!isEditMode">{{ note?.content }}</p>
+    </div>
+
+    <div class="modal-footer" *ngIf="!isEditMode && note">
+      <small>Создано: {{ note.createdAt | date:'dd.MM.yyyy HH:mm' }}</small>
+    </div>
+  </div>
+</div>

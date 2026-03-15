@@ -1,0 +1,35 @@
+<!-- Мобильный оверлей -->
+<div class="mobile-overlay"
+     *ngIf="isMobile && mobileMenuOpen"
+     (click)="onOverlayClick($event)">
+</div>
+
+<!-- Сайдбар -->
+<div class="sidebar"
+     [class.collapsed]="!isMobile && isCollapsed"
+     [class.mobile-open]="isMobile && mobileMenuOpen"
+     [class.mobile-closed]="isMobile && !mobileMenuOpen">
+
+  <div class="sidebar-header" *ngIf="!isMobile">
+    <!-- Кнопка сворачивания слева (только для десктопа) -->
+    <button class="toggle-btn"
+            (click)="toggleSidebar()"
+            [title]="isCollapsed ? 'Развернуть' : 'Свернуть'">
+      <span class="toggle-icon">{{ isCollapsed ? '›' : '‹' }}</span>
+    </button>
+
+    <!-- Заголовок сайдбара (только на десктопе) -->
+    <h3 *ngIf="!isCollapsed">Меню</h3>
+  </div>
+
+  <nav class="sidebar-nav">
+    <ul>
+      <li *ngFor="let item of menuItems"
+          [class.active]="item.route === activeRoute"
+          (click)="navigateTo(item.route)">
+        <span class="menu-icon">{{ item.icon }}</span>
+        <span class="menu-label" *ngIf="!isCollapsed || (isMobile && mobileMenuOpen)">{{ item.label }}</span>
+      </li>
+    </ul>
+  </nav>
+</div>

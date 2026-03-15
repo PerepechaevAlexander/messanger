@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/Элементы решения/">
+    <File Path=".gitignore" />
+  </Folder>
+  <Project Path="messanger.client/messanger.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="messanger.Server/messanger.Server.csproj" />
+</Solution>

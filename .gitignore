@@ -1,0 +1,65 @@
+# IDE - Visual Studio
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# .NET Core (Server) - всё, что в obj и bin
+**/messanger.Server/bin/
+**/messanger.Server/obj/
+**/messanger.Server/Debug/
+**/messanger.Server/Release/
+**/messanger.Server/TestResults/
+**/messanger.Server/coverage/
+**/messanger.Server/*.trx
+**/messanger.Server/.vs/
+
+# Angular (Client) - node_modules и сборки
+**/messanger.client/node_modules/
+**/messanger.client/dist/
+**/messanger.client/tmp/
+**/messanger.client/out-tsc/
+**/messanger.client/.angular/
+**/messanger.client/coverage/
+**/messanger.client/*.log
+**/messanger.client/.env
+**/messanger.client/.angular-config.json
+
+# Angular - obj папки (это то, что вам нужно!)
+**/messanger.client/obj/
+**/messanger.client/bin/
+
+# Visual Studio solution
+.vs/
+*.sln.ide/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.old

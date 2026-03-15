@@ -1,0 +1,98 @@
+.toolbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 250px; /* Ширина развернутого сайдбара */
+  height: 70px;
+  background-color: white;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: left 0.3s ease;
+  z-index: 99;
+  box-sizing: border-box;
+}
+
+  .toolbar.sidebar-collapsed {
+    left: 70px; /* Ширина свернутого сайдбара */
+  }
+
+.toolbar-left {
+  flex: 1;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 400;
+  color: #2c3e50;
+  letter-spacing: -0.5px;
+}
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Кнопка добавления в стиле мобильной плавающей кнопки */
+.toolbar-add-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #4a5568;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+  .toolbar-add-btn:hover {
+    background-color: #5f6b7a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .toolbar-add-btn:active {
+    transform: scale(0.95);
+    background-color: #3a4454;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .toolbar-add-btn .plus-icon {
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 300;
+    opacity: 0.9;
+    transition: all 0.1s ease;
+  }
+
+  .toolbar-add-btn:active .plus-icon {
+    transform: scale(0.9);
+    opacity: 0.8;
+  }
+
+/* Мобильная версия - скрываем тулбар */
+@media (max-width: 768px) {
+  .toolbar {
+    display: none;
+  }
+}
+
+/* Анимации */
+.toolbar {
+  transition: left 0.3s ease, box-shadow 0.3s ease;
+}
+
+.toolbar-add-btn {
+  transition: all 0.2s ease;
+}

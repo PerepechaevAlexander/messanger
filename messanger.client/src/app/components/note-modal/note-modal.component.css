@@ -1,0 +1,254 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+  outline: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-container {
+  background-color: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease;
+}
+
+  .modal-container.edit-mode {
+    max-width: 700px;
+  }
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px 24px;
+  border-bottom: 1px solid #eee;
+  gap: 20px; /* Добавляем промежуток между контентом и кнопками */
+}
+
+.header-content {
+  flex: 1;
+  min-width: 0; /* Позволяет тексту сжиматься */
+}
+
+  .header-content.edit-mode {
+    flex: 1;
+  }
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0; /* Запрещаем сжиматься кнопкам */
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+  word-break: break-word;
+  line-height: 1.3;
+}
+
+.edit-title-input {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 20px;
+  border: 2px solid #3498db;
+  border-radius: 6px;
+  outline: none;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+  .edit-title-input:focus {
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+  }
+
+.edit-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: #f0f0f0;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-size: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+  .edit-btn:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.1);
+  }
+
+  .edit-btn.save-mode {
+    background-color: #27ae60;
+    color: white;
+  }
+
+    .edit-btn.save-mode:hover {
+      background-color: #2ecc71;
+    }
+
+  .edit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #cccccc;
+    transform: none;
+  }
+
+    .edit-btn:disabled:hover {
+      background-color: #cccccc;
+    }
+
+.close-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: #f0f0f0;
+  font-size: 32px;
+  cursor: pointer;
+  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+  .close-btn:hover {
+    color: #e74c3c;
+    background-color: #fee;
+    transform: scale(1.1);
+  }
+
+.modal-content {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+  .modal-content p {
+    margin: 0;
+    color: #666;
+    line-height: 1.6;
+    font-size: 16px;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+.edit-content-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #3498db;
+  border-radius: 6px;
+  font-size: 16px;
+  line-height: 1.6;
+  resize: vertical;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+  .edit-content-textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.3);
+  }
+
+.modal-footer {
+  padding: 16px 24px;
+  border-top: 1px solid #eee;
+  color: #999;
+  font-size: 14px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .modal-container {
+    margin-top: 60px; /* Отступ под мобильный хедер */
+    max-height: calc(80vh - 60px);
+  }
+
+  .modal-header {
+    padding: 15px 20px;
+    gap: 15px;
+  }
+
+    .modal-header h2 {
+      font-size: 20px;
+    }
+
+  .modal-content p {
+    font-size: 14px;
+  }
+
+  .edit-btn, .close-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .edit-btn {
+    font-size: 18px;
+  }
+
+  .close-btn {
+    font-size: 28px;
+  }
+
+  .edit-title-input {
+    font-size: 18px;
+    padding: 6px 10px;
+  }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+  .modal-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .header-actions {
+    align-self: flex-end;
+  }
+}

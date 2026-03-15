@@ -1,0 +1,44 @@
+<div class="notes-container">
+  <!-- Список заметок -->
+  <div class="notes-grid">
+    <div class="note-card"
+         *ngFor="let note of notes"
+         (click)="openNote(note)">
+      <div class="note-header">
+        <h3 class="note-title">{{ note.title }}</h3>
+        <button class="delete-btn" (click)="deleteNote(note.id, $event)" title="Удалить">×</button>
+      </div>
+      <p class="note-content">{{ truncateContent(note.content) }}</p>
+      <div class="note-footer">
+        <small>{{ note.createdAt | date:'dd.MM.yyyy HH:mm' }}</small>
+        <span class="expand-hint" *ngIf="note.content.length > 150">
+          (нажмите для просмотра)
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Плавающая кнопка добавления (только для мобильных) -->
+  <button class="floating-add-btn"
+          *ngIf="isMobile"
+          (click)="createNote()"
+          title="Создать заметку">
+    <span class="plus-icon">+</span>
+  </button>
+
+  <!-- Пустое состояние -->
+  <div class="empty-state" *ngIf="notes.length === 0">
+    <p>У вас пока нет заметок</p>
+    <button class="create-first-btn" (click)="createNote()">
+      Создать первую заметку
+    </button>
+  </div>
+</div>
+
+<!-- Модальное окно для просмотра/создания заметки -->
+<app-note-modal [note]="selectedNote"
+                [isOpen]="isModalOpen"
+                [isNewNote]="isNewNote"
+                (closeModal)="closeModal()"
+                (saveNote)="saveNote($event)">
+</app-note-modal>

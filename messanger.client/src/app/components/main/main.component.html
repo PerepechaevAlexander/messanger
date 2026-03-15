@@ -1,0 +1,28 @@
+<div class="app-container"
+     [class.sidebar-collapsed]="!isMobile && sidebarCollapsed"
+     [class.mobile-menu-open]="isMobile && mobileMenuOpen">
+
+  <!-- Десктопный тулбар (теперь сам знает, что показывать) -->
+  <app-toolbar *ngIf="!isMobile"></app-toolbar>
+
+  <!-- Мобильный хедер -->
+  <div class="mobile-header" *ngIf="isMobile">
+    <button class="mobile-menu-btn"
+            (click)="toggleMobileMenu()"
+            [class.open]="mobileMenuOpen">
+      <span class="hamburger-icon">☰</span>
+    </button>
+    <h1 class="mobile-header-title">{{ currentPageTitle }}</h1>
+    <!-- На мобильных кнопка добавления в плавающем виде, поэтому здесь не нужна -->
+  </div>
+
+  <app-sidebar [mobileMenuOpen]="mobileMenuOpen"
+               (closeMobileMenu)="closeMobileMenu()">
+  </app-sidebar>
+
+  <main class="main-content"
+        [class.with-toolbar]="!isMobile"
+        [class.with-mobile-header]="isMobile">
+    <router-outlet></router-outlet>
+  </main>
+</div>

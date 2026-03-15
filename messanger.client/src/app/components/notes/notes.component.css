@@ -1,0 +1,243 @@
+.notes-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  min-height: calc(100vh - 40px);
+}
+
+/* Сетка заметок */
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.note-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-left: 4px solid #3498db;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  max-height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+  .note-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+/* Подсказка при наведении (только для десктопа) */
+@media (min-width: 769px) {
+  .note-card::before {
+    content: 'Нажмите для просмотра';
+    position: absolute;
+    top: -30px;
+    left: 0;
+    right: 0;
+    background-color: rgba(52, 152, 219, 0.9);
+    color: white;
+    text-align: center;
+    padding: 5px;
+    font-size: 12px;
+    transition: top 0.3s;
+    z-index: 10;
+  }
+
+  .note-card:hover::before {
+    top: 0;
+  }
+}
+
+.note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 11;
+}
+
+.note-title {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+  flex: 1;
+  word-break: break-word;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #e74c3c;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0 5px;
+  line-height: 1;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+  .delete-btn:hover {
+    opacity: 1;
+  }
+
+.note-content {
+  margin: 0 0 10px 0;
+  color: #666;
+  line-height: 1.5;
+  word-break: break-word;
+  overflow: hidden;
+  position: relative;
+  max-height: 4.5em;
+}
+
+  .note-content::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 1.5em;
+    background: linear-gradient(transparent, white);
+    pointer-events: none;
+  }
+
+.note-footer {
+  color: #999;
+  font-size: 12px;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.expand-hint {
+  color: #3498db;
+  font-size: 11px;
+  font-style: italic;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.note-card:hover .expand-hint {
+  opacity: 1;
+}
+
+/* Плавающая кнопка добавления (только для мобильных) */
+.floating-add-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #4a5568;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: none; /* Скрыта по умолчанию */
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  z-index: 100;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+  .floating-add-btn:hover {
+    background-color: #5f6b7a;
+  }
+
+  .floating-add-btn:active {
+    transform: scale(0.93);
+    background-color: #3a4454;
+  }
+
+  .floating-add-btn .plus-icon {
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 300;
+    opacity: 0.9;
+  }
+
+/* Пустое состояние */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+  .empty-state p {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+
+.create-first-btn {
+  background-color: #4a5568;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, transform 0.1s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+  .create-first-btn:hover {
+    background-color: #5f6b7a;
+  }
+
+  .create-first-btn:active {
+    transform: scale(0.97);
+    background-color: #3a4454;
+  }
+
+/* Мобильные стили */
+@media (max-width: 768px) {
+  .notes-container {
+    padding: 15px;
+  }
+
+  .notes-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-bottom: 80px;
+  }
+
+  .floating-add-btn {
+    display: flex; /* Показываем только на мобильных */
+  }
+
+  .empty-state {
+    padding: 40px 15px;
+  }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+  .floating-add-btn {
+    bottom: 15px;
+    left: 15px;
+    width: 52px;
+    height: 52px;
+  }
+
+    .floating-add-btn .plus-icon {
+      font-size: 26px;
+    }
+}

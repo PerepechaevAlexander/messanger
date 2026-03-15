@@ -1,0 +1,13 @@
+<div class="toolbar" [class.sidebar-collapsed]="isSidebarCollapsed">
+  <div class="toolbar-left">
+    <h1 class="page-title">{{ currentPageTitle }}</h1>
+  </div>
+  <div class="toolbar-right">
+    <button class="toolbar-add-btn"
+            *ngIf="showAddButton"
+            (click)="onCreateNote()"
+            title="Создать заметку">
+      <span class="plus-icon">+</span>
+    </button>
+  </div>
+</div>
