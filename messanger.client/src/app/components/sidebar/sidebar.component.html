@@ -10,11 +10,6 @@
      [class.mobile-open]="isMobile && mobileMenuOpen"
      [class.mobile-closed]="isMobile && !mobileMenuOpen">
 
-  <div class="sidebar-header" *ngIf="!isMobile">
-    <!-- Заголовок сайдбара (только на десктопе) -->
-    <h3 *ngIf="!isCollapsed">Меню</h3>
-  </div>
-
   <nav class="sidebar-nav">
     <ul>
       <li *ngFor="let item of menuItems"
@@ -25,4 +20,5 @@
       </li>
     </ul>
   </nav>
+
 </div>
