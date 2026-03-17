@@ -15,8 +15,12 @@
       <li *ngFor="let item of menuItems"
           [class.active]="item.route === activeRoute"
           (click)="navigateTo(item.route)">
-        <span class="menu-icon">{{ item.icon }}</span>
-        <span class="menu-label" *ngIf="!isCollapsed || (isMobile && mobileMenuOpen)">{{ item.label }}</span>
+        <div class="menu-item-container">
+          <span class="menu-icon">{{ item.icon }}</span>
+          <div class="menu-label-wrapper" [class.hidden]="isCollapsed && !isMobile">
+            <span class="menu-label">{{ item.label }}</span>
+          </div>
+        </div>
       </li>
     </ul>
   </nav>
