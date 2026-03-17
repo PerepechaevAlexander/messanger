@@ -98,8 +98,8 @@
     transform: translateX(-100%);
     width: 280px !important;
     box-shadow: none;
-    top: 60px;
-    height: calc(100vh - 60px);
+    top: 70px;
+    height: calc(100vh - 70px);
     padding-top: 10px; /* Небольшой отступ сверху */
   }
 
@@ -129,7 +129,7 @@
 /* Оверлей для мобильной версии */
 .mobile-overlay {
   position: fixed;
-  top: 60px;
+  top: 70px;
   left: 0;
   right: 0;
   bottom: 0;
