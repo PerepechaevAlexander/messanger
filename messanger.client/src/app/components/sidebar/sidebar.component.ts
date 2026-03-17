@@ -19,11 +19,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   menuItems = [
-    { label: 'Хуй', route: '/', icon: '🏠' },
+    { label: 'Главная', route: '/', icon: '🏠' },
     { label: 'Заметки', route: '/notes', icon: '📒' },
-    { label: 'Говно', route: '/about', icon: 'ℹ️' },
-    { label: 'И', route: '/contact', icon: '📧' },
-    { label: 'Муравей', route: '/settings', icon: 'fas fa-cog' }
+    { label: 'И', route: '/about', icon: 'ℹ️' },
+    { label: 'Муравей', route: '/contact', icon: '📧' }
   ];
 
   activeRoute: string = '/';
