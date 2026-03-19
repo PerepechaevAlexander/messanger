@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { filter, Subscription } from 'rxjs';
 import { SidebarStateService } from '../../services/sidebar-state.service';
 import { NotesStateService } from '../../services/notes-state.service';
@@ -11,10 +11,10 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrl: './toolbar.component.css'
 })
 export class ToolbarComponent implements OnInit, OnDestroy {
-  isSidebarCollapsed = false;
   currentPageTitle = '';
   showAddButton = false;
   isMobile = false;
+  isSidebarOpen = false;
 
   private subscriptions: Subscription[] = [];
 
@@ -26,8 +26,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscriptions.push(
-      this.sidebarState.collapsed$.subscribe(collapsed => {
-        this.isSidebarCollapsed = collapsed;
+      this.sidebarState.isOpen$.subscribe(isOpen => {
+        this.isSidebarOpen = isOpen;
       })
     );
 
@@ -57,12 +57,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   }
 
   // Метод для открытия мобильного меню
-  openSidebar() {
-    if (this.isMobile) {
-      this.sidebarState.toggleMobileOpen();
-    } else {
-      this.sidebarState.toggleCollapsed();
-    }
+  toggleSidebar() {
+    this.sidebarState.toggle();
   }
 
   onCreateNote() {

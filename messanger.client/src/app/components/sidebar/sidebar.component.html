@@ -1,15 +1,15 @@
 <!-- Мобильный оверлей -->
 <div class="overlay"
-     [class.mobile-overlay]="isMobile && mobileMenuOpen"
-     *ngIf="mobileMenuOpen || !isCollapsed"
+     [class.mobile-overlay]="isMobile && isSidebarOpen"
+     *ngIf="isSidebarOpen"
      (click)="onOverlayClick($event)">
 </div>
 
 <!-- Сайдбар -->
 <div class="sidebar"
-     [class.collapsed]="!isMobile && isCollapsed"
-     [class.mobile-open]="isMobile && mobileMenuOpen"
-     [class.mobile-closed]="isMobile && !mobileMenuOpen">
+     [class.collapsed]="!isMobile && !isSidebarOpen"
+     [class.mobile-open]="isMobile && isSidebarOpen"
+     [class.mobile-closed]="isMobile && !isSidebarOpen">
 
   <nav class="sidebar-nav">
     <ul>
@@ -18,7 +18,7 @@
           (click)="navigateTo(item.route)">
         <div class="menu-item-container">
           <span class="menu-icon">{{ item.icon }}</span>
-          <div class="menu-label-wrapper" [class.hidden]="isCollapsed && !isMobile">
+          <div class="menu-label-wrapper" [class.hidden]="!isSidebarOpen && !isMobile">
             <span class="menu-label">{{ item.label }}</span>
           </div>
         </div>

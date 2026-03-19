@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { SidebarStateService } from '../../services/sidebar-state.service';
 import { filter, Subscription } from 'rxjs';
@@ -10,9 +10,8 @@ import { filter, Subscription } from 'rxjs';
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-  mobileMenuOpen = false;
-  isCollapsed = false;
   isMobile = false;
+  isSidebarOpen = false;
   
   private subscriptions: Subscription[] = [];
 
@@ -33,13 +32,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // Подписываемся на изменения состояния
-    this.subscriptions.push(
-      this.sidebarState.collapsed$.subscribe(collapsed => {
-          this.isCollapsed = collapsed;
-      })
-    );
-
     this.subscriptions.push(
       this.sidebarState.isMobile$.subscribe(isMobile => {
           this.isMobile = isMobile;
@@ -47,8 +39,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     );
 
     this.subscriptions.push(
-      this.sidebarState.mobileOpen$.subscribe(open => {
-          this.mobileMenuOpen = open;
+      this.sidebarState.isOpen$.subscribe(isOpen => {
+        this.isSidebarOpen = isOpen;
       })
     );
 
@@ -62,7 +54,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.activeRoute = this.router.url;
 
         // Закрываем меню после навигации
-        this.toggleSidebar();
+        this.sidebarState.close();
       })
     );
   }
@@ -73,9 +65,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
 
   navigateTo(route: string): void {
-    // Не делаем ничего, если уже на этом маршруте
     if (this.router.url === route) {
-      this.toggleSidebar();
+      this.sidebarState.close();
     }
 
     this.router.navigate([route]);
@@ -84,15 +75,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   onOverlayClick(event: MouseEvent) {
     // Закрываем меню при клике на оверлей
     if ((event.target as HTMLElement).classList.contains('overlay')) {
-      this.toggleSidebar();
-    }
-  }
-
-  toggleSidebar() {
-    if (this.isMobile) {
-      this.sidebarState.toggleMobileOpen();
-    } else {
-      this.sidebarState.toggleCollapsed();
+      this.sidebarState.close();
     }
   }
 }

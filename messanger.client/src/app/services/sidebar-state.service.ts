@@ -6,13 +6,11 @@ import { BehaviorSubject, distinctUntilChanged, fromEvent, map, startWith } from
   providedIn: 'root'
 })
 export class SidebarStateService {
-  private collapsedSubject = new BehaviorSubject<boolean>(false);
-  private mobileOpenSubject = new BehaviorSubject<boolean>(false);
   private isMobileSubject = new BehaviorSubject<boolean>(false);
+  private isOpenSubject = new BehaviorSubject<boolean>(false);
 
-  collapsed$ = this.collapsedSubject.asObservable();
-  mobileOpen$ = this.mobileOpenSubject.asObservable();
   isMobile$ = this.isMobileSubject.asObservable();
+  isOpen$ = this.isOpenSubject.asObservable();
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object
@@ -20,50 +18,21 @@ export class SidebarStateService {
     this.initializeState();
   }
 
-  toggleCollapsed(): void {
-    // Используем snapshot для проверки текущего значения
-    this.isMobile$.pipe(
-      map(isMobile => {
-        // Не переключаем состояние на мобильных устройствах
-        if (!isMobile) {
-          const newValue = !this.collapsedSubject.value;
-          this.collapsedSubject.next(newValue);
-          localStorage.setItem('sidebarCollapsed', JSON.stringify(newValue));
-        }
-      })
-    ).subscribe();
+  /* Закрывает сайдбар. */
+  close(): void {
+    if (this.isOpenSubject.value) {
+      this.isOpenSubject.next(false);
+    }
   }
 
-  toggleMobileOpen(): void {
-    this.isMobile$.pipe(
-      map(isMobile => {
-        // Переключаем состояние ТОЛЬКО на мобильных устройствах
-        if (isMobile) {
-          const newValue = !this.mobileOpenSubject.value;
-          this.mobileOpenSubject.next(newValue);
-          document.body.style.overflow = newValue ? 'hidden' : '';
-        }
-      })
-    ).subscribe();
-  }
-
-  closeMobile(): void {
-    this.isMobile$.pipe(
-      map(isMobile => {
-        // Переключаем состояние ТОЛЬКО на мобильных устройствах и если сайдбар открыт
-        if (isMobile && this.mobileOpenSubject.value) {
-          this.mobileOpenSubject.next(false);
-          document.body.style.overflow = '';
-        }
-      })
-    ).subscribe();
+  /* Переключает состояние сайдбара. */
+  toggle(): void {
+    const newValue = !this.isOpenSubject.value;
+    this.isOpenSubject.next(newValue);
   }
 
   private initializeState(): void {
     if (isPlatformBrowser(this.platformId)) {
-      // Загружаем сохраненное состояние
-      this.loadSavedState();
-
       // Настраиваем отслеживание resize
       fromEvent(window, 'resize')
         .pipe(
@@ -73,19 +42,8 @@ export class SidebarStateService {
         )
         .subscribe(isMobile => {
           this.isMobileSubject.next(isMobile);
-
-          if (!isMobile) {
-            this.mobileOpenSubject.next(false);
-            document.body.style.overflow = '';
-          }
+          this.isOpenSubject.next(false);
         });
-    }
-  }
-
-  private loadSavedState(): void {
-    const savedState = localStorage.getItem('sidebarCollapsed');
-    if (savedState) {
-      this.collapsedSubject.next(JSON.parse(savedState));
     }
   }
 }

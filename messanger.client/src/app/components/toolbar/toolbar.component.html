@@ -4,16 +4,16 @@
   <div class="toolbar-left">
     <button class="menu-btn mobile-menu-btn"
             *ngIf="isMobile"
-            (click)="openSidebar()"
+            (click)="toggleSidebar()"
             title="Открыть меню">
       <span class="menu-icon">☰</span>
     </button>
     <!-- Кнопка сворачивания слева (только для десктопа) -->
     <button class="toggle-btn"
             *ngIf="!isMobile"
-            (click)="openSidebar()"
-            [title]="isSidebarCollapsed ? 'Развернуть' : 'Свернуть'">
-      <span class="toggle-icon">{{ isSidebarCollapsed ? '›' : '‹' }}</span>
+            (click)="toggleSidebar()"
+            [title]="isSidebarOpen ? 'Свернуть' : 'Развернуть'">
+      <span class="toggle-icon">{{ isSidebarOpen ? '‹' : '›' }}</span>
     </button>
 
     <h1 class="page-title">{{ currentPageTitle }}</h1>

@@ -10,8 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class MainComponent implements OnInit {
   isMobile = false;
-  sidebarCollapsed = false;
-  mobileMenuOpen = false;
+  isSidebarOpen = false;
 
   private subscriptions: Subscription[] = [];
 
@@ -28,14 +27,8 @@ export class MainComponent implements OnInit {
     );
 
     this.subscriptions.push(
-      this.sidebarState.collapsed$.subscribe(collapsed => {
-        this.sidebarCollapsed = collapsed;
-      })
-    );
-
-    this.subscriptions.push(
-      this.sidebarState.mobileOpen$.subscribe(open => {
-        this.mobileMenuOpen = open;
+      this.sidebarState.isOpen$.subscribe(isOpen => {
+        this.isSidebarOpen = isOpen;
       })
     );
   }
