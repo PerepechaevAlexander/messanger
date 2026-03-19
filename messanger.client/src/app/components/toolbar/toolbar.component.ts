@@ -3,6 +3,7 @@ import { filter, Subscription } from 'rxjs';
 import { SidebarStateService } from '../../services/sidebar-state.service';
 import { NotesStateService } from '../../services/notes-state.service';
 import { NavigationEnd, Router } from '@angular/router';
+import { DeviceTypeService } from '../../services/device-type-service';
 
 @Component({
   selector: 'app-toolbar',
@@ -19,20 +20,21 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   constructor(
-    private sidebarState: SidebarStateService,
+    private sidebarStateService: SidebarStateService,
+    private deviceTypeService: DeviceTypeService,
     private notesState: NotesStateService,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit() {
     this.subscriptions.push(
-      this.sidebarState.isOpen$.subscribe(isOpen => {
+      this.sidebarStateService.isOpen$.subscribe(isOpen => {
         this.isSidebarOpen = isOpen;
       })
     );
 
     this.subscriptions.push(
-      this.sidebarState.isMobile$.subscribe(isMobile => {
+      this.deviceTypeService.isMobile$.subscribe(isMobile => {
         this.isMobile = isMobile;
       })
     );
@@ -56,9 +58,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  // Метод для открытия мобильного меню
   toggleSidebar() {
-    this.sidebarState.toggle();
+    this.sidebarStateService.toggle();
   }
 
   onCreateNote() {

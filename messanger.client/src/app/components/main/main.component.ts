@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SidebarStateService } from '../../services/sidebar-state.service';
 import { Subscription } from 'rxjs';
+import { DeviceTypeService } from '../../services/device-type-service';
 
 @Component({
   selector: 'app-main',
@@ -15,19 +16,20 @@ export class MainComponent implements OnInit {
   private subscriptions: Subscription[] = [];
 
   constructor(
-    private sidebarState: SidebarStateService
+    private sidebarStateService: SidebarStateService,
+    private deviceTypeService: DeviceTypeService
   ) { }
 
   ngOnInit() {
     // Подписываемся на изменения состояния
     this.subscriptions.push(
-      this.sidebarState.isMobile$.subscribe(isMobile => {
+      this.deviceTypeService.isMobile$.subscribe(isMobile => {
         this.isMobile = isMobile;
       })
     );
 
     this.subscriptions.push(
-      this.sidebarState.isOpen$.subscribe(isOpen => {
+      this.sidebarStateService.isOpen$.subscribe(isOpen => {
         this.isSidebarOpen = isOpen;
       })
     );

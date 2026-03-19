@@ -13,6 +13,7 @@ import { SidebarStateService } from './services/sidebar-state.service';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { NotesStateService } from './services/notes-state.service';
 import { HomeComponent } from './components/home/home.component';
+import { DeviceTypeService } from './services/device-type-service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import { HomeComponent } from './components/home/home.component';
   ],
   providers: [
     SidebarStateService,
-    NotesStateService],
+    NotesStateService,
+    DeviceTypeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

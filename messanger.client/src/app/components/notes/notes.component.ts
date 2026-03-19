@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Note } from '../../models/note.model';
 import { NotesStateService } from '../../services/notes-state.service';
 import { Subscription } from 'rxjs';
-import { SidebarStateService } from '../../services/sidebar-state.service';
+import { DeviceTypeService } from '../../services/device-type-service';
 
 @Component({
   selector: 'app-notes',
@@ -21,7 +21,7 @@ export class NotesComponent implements OnInit, OnDestroy {
 
   constructor(
     private notesState: NotesStateService,
-    private sidebarState: SidebarStateService
+    private deviceTypeService: DeviceTypeService,
   ) { }
 
   ngOnInit() {
@@ -35,7 +35,7 @@ export class NotesComponent implements OnInit, OnDestroy {
     );
 
     this.subscriptions.push(
-      this.sidebarState.isMobile$.subscribe(isMobile => {
+      this.deviceTypeService.isMobile$.subscribe(isMobile => {
         this.isMobile = isMobile;
       })
     );

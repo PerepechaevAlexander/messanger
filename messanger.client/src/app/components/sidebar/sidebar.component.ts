@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { SidebarStateService } from '../../services/sidebar-state.service';
 import { filter, Subscription } from 'rxjs';
+import { DeviceTypeService } from '../../services/device-type-service';
 
 @Component({
   selector: 'app-sidebar',
@@ -26,20 +27,21 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private sidebarState: SidebarStateService
+    private sidebarStateService: SidebarStateService,
+    private deviceTypeService: DeviceTypeService,
   ) {
     this.activeRoute = this.router.url;
   }
 
   ngOnInit() {
     this.subscriptions.push(
-      this.sidebarState.isMobile$.subscribe(isMobile => {
+      this.deviceTypeService.isMobile$.subscribe(isMobile => {
           this.isMobile = isMobile;
       })
     );
 
     this.subscriptions.push(
-      this.sidebarState.isOpen$.subscribe(isOpen => {
+      this.sidebarStateService.isOpen$.subscribe(isOpen => {
         this.isSidebarOpen = isOpen;
       })
     );
@@ -54,7 +56,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.activeRoute = this.router.url;
 
         // Закрываем меню после навигации
-        this.sidebarState.close();
+        this.sidebarStateService.close();
       })
     );
   }
@@ -66,7 +68,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   navigateTo(route: string): void {
     if (this.router.url === route) {
-      this.sidebarState.close();
+      this.sidebarStateService.close();
     }
 
     this.router.navigate([route]);
@@ -75,7 +77,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   onOverlayClick(event: MouseEvent) {
     // Закрываем меню при клике на оверлей
     if ((event.target as HTMLElement).classList.contains('overlay')) {
-      this.sidebarState.close();
+      this.sidebarStateService.close();
     }
   }
 }
