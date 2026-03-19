@@ -43,8 +43,4 @@ export class MainComponent implements OnInit {
   ngOnDestroy() {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
-
-  closeMobileMenu() {
-    this.sidebarState.closeMobile();
-  }
 }

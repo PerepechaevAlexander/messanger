@@ -1,6 +1,7 @@
 <!-- Мобильный оверлей -->
-<div class="mobile-overlay"
-     *ngIf="isMobile && mobileMenuOpen"
+<div class="overlay"
+     [class.mobile-overlay]="isMobile && mobileMenuOpen"
+     *ngIf="mobileMenuOpen || !isCollapsed"
      (click)="onOverlayClick($event)">
 </div>
 

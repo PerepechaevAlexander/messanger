@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { SidebarStateService } from '../../services/sidebar-state.service';
 import { filter, Subscription } from 'rxjs';
@@ -10,9 +10,7 @@ import { filter, Subscription } from 'rxjs';
   styleUrl: './sidebar.component.css'
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-  @Input() mobileMenuOpen: boolean = false;
-  @Output() closeMobileMenu = new EventEmitter<void>();
-
+  mobileMenuOpen = false;
   isCollapsed = false;
   isMobile = false;
   
@@ -63,10 +61,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
         // Обновляем активный маршрут
         this.activeRoute = this.router.url;
 
-        // На мобильных устройствах закрываем меню после навигации
-        if (this.isMobile) {
-          this.closeMobileMenu.emit();
-        }
+        // Закрываем меню после навигации
+        this.toggleSidebar();
       })
     );
   }
@@ -76,27 +72,27 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  toggleSidebar() {
-    if (this.isMobile) {
-      this.sidebarState.toggleMobileOpen();
-    } else {
-      this.sidebarState.toggleCollapsed();
-    }
-  }
-
   navigateTo(route: string): void {
     // Не делаем ничего, если уже на этом маршруте
     if (this.router.url === route) {
-      return;
+      this.toggleSidebar();
     }
 
     this.router.navigate([route]);
   }
 
   onOverlayClick(event: MouseEvent) {
-    // Закрываем мобильное меню при клике на оверлей
-    if ((event.target as HTMLElement).classList.contains('mobile-overlay')) {
-      this.closeMobileMenu.emit();
+    // Закрываем меню при клике на оверлей
+    if ((event.target as HTMLElement).classList.contains('overlay')) {
+      this.toggleSidebar();
+    }
+  }
+
+  toggleSidebar() {
+    if (this.isMobile) {
+      this.sidebarState.toggleMobileOpen();
+    } else {
+      this.sidebarState.toggleCollapsed();
     }
   }
 }

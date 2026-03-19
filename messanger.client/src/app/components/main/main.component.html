@@ -1,13 +1,9 @@
 <div class="app-container"
-     [class.sidebar-collapsed]="!isMobile && sidebarCollapsed"
      [class.mobile-menu-open]="isMobile && mobileMenuOpen">
 
-  <!-- Десктопный тулбар (теперь сам знает, что показывать) -->
   <app-toolbar></app-toolbar>
 
-  <app-sidebar [mobileMenuOpen]="mobileMenuOpen"
-               (closeMobileMenu)="closeMobileMenu()">
-  </app-sidebar>
+  <app-sidebar></app-sidebar>
 
   <main class="main-content"
         [class.with-toolbar]="!isMobile"
