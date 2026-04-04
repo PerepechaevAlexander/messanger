@@ -35,7 +35,7 @@
     </div>
 
     <div class="modal-footer" *ngIf="!isEditMode && note">
-      <small>Создано: {{ note.createdAt | date:'dd.MM.yyyy HH:mm' }}</small>
+      <small>Создано: {{ note.creationDateTime | date:'dd.MM.yyyy HH:mm' }}</small>
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit, SimpleChanges } from '@angular/core';
-import { Note } from '../../models/note.model';
+import { Note } from '../../models/note';
 
 @Component({
   selector: 'app-note-modal',
@@ -68,9 +68,12 @@ export class NoteModalComponent implements OnInit {
         // Создаем новую заметку
         const newNote: Note = {
           id: Date.now(),
+          isDeleted: false,
+          creationDateTime: new Date(),
+          lastModifyDateTime: new Date(),
+          lastModifyUserId: 1,
           title: this.editTitle,
-          content: this.editContent,
-          createdAt: new Date()
+          content: this.editContent
         };
         this.saveNote.emit(newNote);
         // После сохранения новой заметки переключаемся в режим просмотра

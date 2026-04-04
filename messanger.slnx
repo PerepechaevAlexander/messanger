@@ -1,6 +1,10 @@
 <Solution>
+  <Folder Name="/migrations/">
+    <File Path="migrations/V202604032100___add_notes_table.sql" />
+  </Folder>
   <Folder Name="/Элементы решения/">
     <File Path=".gitignore" />
+    <File Path="flyway.toml.template" />
   </Folder>
   <Project Path="messanger.client/messanger.client.esproj">
     <Build />

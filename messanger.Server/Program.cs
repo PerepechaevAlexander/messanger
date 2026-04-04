@@ -1,8 +1,17 @@
+using messanger.Server.Repositories;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddDbContext<ApplicationDbContext>(optionsBuilder =>
+    optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")));
 
+// Регистрируем сервисы для доступа к сущностям БД
+builder.Services.AddTransient<NoteRepository>();
+
+//Добавляем контроллеры
 builder.Services.AddControllers();
+
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 

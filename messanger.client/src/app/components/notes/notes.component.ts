@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Note } from '../../models/note.model';
+import { Note } from '../../models/note';
 import { NotesStateService } from '../../services/notes-state.service';
 import { Subscription } from 'rxjs';
 import { DeviceTypeService } from '../../services/device-type-service';
+import { NoteApiService } from '../../services/api/note.api-service';
 
 @Component({
   selector: 'app-notes',
@@ -22,6 +23,7 @@ export class NotesComponent implements OnInit, OnDestroy {
   constructor(
     private notesState: NotesStateService,
     private deviceTypeService: DeviceTypeService,
+    private noteApiService: NoteApiService
   ) { }
 
   ngOnInit() {
@@ -46,33 +48,9 @@ export class NotesComponent implements OnInit, OnDestroy {
   }
 
   loadNotes() {
-    const savedNotes = localStorage.getItem('notes');
-    if (savedNotes) {
-      this.notes = JSON.parse(savedNotes);
-    } else {
-      // Демо-данные
-      this.notes = [
-        {
-          id: 1,
-          title: 'Первая заметка',
-          content: 'Это пример содержимого первой заметки. Здесь может быть очень длинный текст, который не поместится в карточку и будет обрезан с многоточием.',
-          createdAt: new Date()
-        },
-        {
-          id: 2,
-          title: 'Вторая заметка',
-          content: 'А это содержимое второй заметки. Тоже достаточно длинное, чтобы показать, как работает обрезка текста в карточках.',
-          createdAt: new Date()
-        },
-        {
-          id: 3,
-          title: 'Короткая заметка',
-          content: 'Это короткая заметка для примера.',
-          createdAt: new Date()
-        }
-      ];
-      this.saveNotes();
-    }
+    this.noteApiService.get().subscribe((res) => {
+      this.notes = res;
+    })
   }
 
   saveNotes() {

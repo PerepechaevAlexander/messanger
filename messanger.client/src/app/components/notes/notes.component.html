@@ -10,7 +10,7 @@
       </div>
       <p class="note-content">{{ truncateContent(note.content) }}</p>
       <div class="note-footer">
-        <small>{{ note.createdAt | date:'dd.MM.yyyy HH:mm' }}</small>
+        <small>{{ note.creationDateTime | date:'dd.MM.yyyy HH:mm' }}</small>
         <span class="expand-hint" *ngIf="note.content.length > 150">
           (нажмите для просмотра)
         </span>
