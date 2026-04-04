@@ -1,8 +1,0 @@
-[flyway]
-locations = ["filesystem:migrations"]
-
-[environments.default]
-url = "jdbc:postgresql://{DB_HOST}:{DB_PORT}/{DB_NAME}"
-user = "{DB_USER}"
-password = "{DB_PASSWORD}"
-baselineOnMigrate = "true"

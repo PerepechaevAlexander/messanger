@@ -63,8 +63,3 @@ lerna-debug.log*
 *.temp
 *.bak
 *.old
-
-# Config files with secrets
-**/messanger.Server/appsettings.Development.json
-**/messanger.Server/appsettings.json
-flyway.toml

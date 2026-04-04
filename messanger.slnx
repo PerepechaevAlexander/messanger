@@ -3,8 +3,9 @@
     <File Path="migrations/V202604032100___add_notes_table.sql" />
   </Folder>
   <Folder Name="/Элементы решения/">
+    <File Path=".env.example" />
     <File Path=".gitignore" />
-    <File Path="flyway.toml.template" />
+    <File Path="docker-compose.yml" />
   </Folder>
   <Project Path="messanger.client/messanger.client.esproj">
     <Build />

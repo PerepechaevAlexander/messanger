@@ -1,6 +1,7 @@
-import { Inject, Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
 import { Note } from '../../models/note';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,6 @@ export class NoteApiService {
 
   // Получить заметки.
   get() {
-    return this.http.get<Note[]>("/Note/Get")
+    return this.http.get<Note[]>(`${environment.apiUrl}/Note/Get`)
   }
 }
