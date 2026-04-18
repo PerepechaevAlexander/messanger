@@ -1,12 +1,10 @@
-﻿using messanger.Server.Models.Base;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Сore.Data.Models;
 
-namespace messanger.Server.Models;
+namespace Notes.Data.Models;
 
 /// <summary>
 /// Заметка.
 /// </summary>
-[Table("notes")]
 public class Note : BaseModel
 {
     /// <summary>

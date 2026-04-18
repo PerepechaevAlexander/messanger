@@ -16,14 +16,14 @@ Thumbs.db
 desktop.ini
 
 # .NET Core (Server) - всё, что в obj и bin
-**/messanger.Server/bin/
-**/messanger.Server/obj/
-**/messanger.Server/Debug/
-**/messanger.Server/Release/
-**/messanger.Server/TestResults/
-**/messanger.Server/coverage/
-**/messanger.Server/*.trx
-**/messanger.Server/.vs/
+**/bin/
+**/obj/
+**/Debug/
+**/Release/
+**/TestResults/
+**/coverage/
+**/*.trx
+**/.vs/
 
 # Angular (Client) - node_modules и сборки
 **/messanger.client/node_modules/

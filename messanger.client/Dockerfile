@@ -14,5 +14,8 @@ COPY . .
 # Устанавливаем Angular CLI
 RUN npm install -g @angular/cli
 
+# Создаем конфигурацию для Docker
+RUN cp src/environments/environment.docker.ts src/environments/environment.ts
+
 # Hot reload с доступом наружу
 CMD ["ng", "serve", "--host", "0.0.0.0", "--poll=2000"]

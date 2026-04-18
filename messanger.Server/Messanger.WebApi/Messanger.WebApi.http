@@ -1,0 +1,6 @@
+@messanger.Server_HostAddress = http://localhost:5000
+
+GET {{messanger.Server_HostAddress}}/Note/Get
+Accept: application/json
+
+###

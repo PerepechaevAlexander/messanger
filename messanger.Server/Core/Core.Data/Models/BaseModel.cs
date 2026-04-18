@@ -1,4 +1,4 @@
-﻿namespace messanger.Server.Models.Base;
+﻿namespace Сore.Data.Models;
 
 /// <summary>
 /// Базовый класс для всех моделей БД.

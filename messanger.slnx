@@ -1,15 +1,29 @@
 <Solution>
-  <Folder Name="/migrations/">
-    <File Path="migrations/V202604032100___add_notes_table.sql" />
-  </Folder>
-  <Folder Name="/Элементы решения/">
+  <Folder Name="/elements/">
     <File Path=".env.example" />
     <File Path=".gitignore" />
     <File Path="docker-compose.yml" />
+  </Folder>
+  <Folder Name="/messanger.Server/">
+    <File Path=".dockerignore" />
+    <Project Path="messanger.Server/Messanger.WebApi/Messanger.WebApi.csproj" Id="308d622d-7aad-49cf-a1f2-7c16198a3771" />
+  </Folder>
+  <Folder Name="/messanger.Server/Core/">
+    <Project Path="messanger.Server/Core/Core.Data/Core.Data.csproj" />
+    <Project Path="messanger.Server/Core/Core.Logic/Core.Logic.csproj" />
+    <Project Path="messanger.Server/core/Core.WebApi/Core.WebApi.csproj" />
+  </Folder>
+  <Folder Name="/messanger.Server/Modules/" />
+  <Folder Name="/messanger.Server/Modules/Notes/">
+    <Project Path="messanger.Server/Modules/Notes/Notes.Data/Notes.Data.csproj" />
+    <Project Path="messanger.Server/Modules/Notes/Notes.Logic/Notes.Logic.csproj" />
+    <Project Path="messanger.Server/Modules/Notes/Notes.WebApi/Notes.WebApi.csproj" />
+  </Folder>
+  <Folder Name="/migrations/">
+    <File Path="migrations/V202604032100___add_notes_table.sql" />
   </Folder>
   <Project Path="messanger.client/messanger.client.esproj">
     <Build />
     <Deploy />
   </Project>
-  <Project Path="messanger.Server/messanger.Server.csproj" />
 </Solution>
