@@ -1,14 +1,18 @@
-﻿using Сore.Data.Models;
+﻿using Core.Dto;
+using Сore.Data.Models;
 
 namespace Сore.Logic.Contracts;
 
 /// <summary>
 /// Базовый контракт репозитория сущности
 /// </summary>
-public interface IRepository<T> where T : BaseModel 
+public interface IRepository<TModel, TDto, TSaveDto>
+    where TModel : BaseModel
+    where TDto : BaseDto
+    where TSaveDto : BaseDto
 {
     /// <summary>
     /// Получить все сущности.
     /// </summary>
-    Task<IEnumerable<T>> Get();
+    Task<IEnumerable<TDto>> Get();
 }

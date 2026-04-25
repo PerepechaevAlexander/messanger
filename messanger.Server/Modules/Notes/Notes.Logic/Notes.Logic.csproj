@@ -7,8 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Mapster" Version="10.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Core.Dto\Core.Dto.csproj" />
     <ProjectReference Include="..\..\..\Core\Core.Logic\Core.Logic.csproj" />
     <ProjectReference Include="..\Notes.Data\Notes.Data.csproj" />
+    <ProjectReference Include="..\Notes.Dto\Notes.Dto.csproj" />
   </ItemGroup>
 
 </Project>

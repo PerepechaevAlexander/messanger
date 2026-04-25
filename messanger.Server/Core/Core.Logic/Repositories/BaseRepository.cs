@@ -1,14 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Core.Dto;
+using Mapster;
+using Microsoft.EntityFrameworkCore;
 using Сore.Data;
-using Сore.Logic.Contracts;
 using Сore.Data.Models;
+using Сore.Logic.Contracts;
 
 namespace Сore.Logic.Repositories;
 
 /// <summary>
 /// Базовый репозиторий
 /// </summary>
-public abstract class BaseRepository<T> : IRepository<T> where T : BaseModel
+public abstract class BaseRepository<TModel, TDto, TSaveDto>
+    : IRepository<TModel, TDto, TSaveDto>
+    where TModel : BaseModel
+    where TDto : BaseDto
+    where TSaveDto : BaseDto
 {
     protected IDbContext DbContext { get; }
 
@@ -18,8 +24,10 @@ public abstract class BaseRepository<T> : IRepository<T> where T : BaseModel
     }
 
     /// <inheritdoc/>
-    public virtual async Task<IEnumerable<T>> Get()
+    public virtual async Task<IEnumerable<TDto>> Get()
     {
-        return await DbContext.GetQueryable<T>().ToListAsync();
+        return await DbContext.GetQueryable<TModel>()
+            .ProjectToType<TDto>()
+            .ToListAsync();
     }
 }

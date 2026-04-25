@@ -1,4 +1,7 @@
+using Core.WebApi.Contracts;
 using Core.WebApi.Infrastructure;
+using Mapster;
+using MapsterMapper;
 using Microsoft.EntityFrameworkCore;
 using Notes.WebApi.Infrastructure;
 using Сore.Data;
@@ -11,6 +14,7 @@ builder.Services.AddDbContext<IDbContext, ApplicationDbContext>(optionsBuilder =
 // пока так, потом разберусь
 var modules = new List<IModule>
 {
+    new CoreModule(), // TODO используется только для маппингов, мб перенести в Shared
     new NotesModule()
 };
 
@@ -20,6 +24,20 @@ foreach (var module in modules)
     module.RegisterServices(builder.Services);
     module.RegisterControllers(mvcBuilder);
 }
+
+builder.Services.AddSingleton(() =>
+{
+    var config = new TypeAdapterConfig();
+
+    foreach (var module in modules)
+    {
+        module.RegisterMapperConfig(config);
+    }
+
+    return config;
+});
+
+builder.Services.AddScoped<IMapper, Mapper>();
 
 builder.Services.AddCors(options =>
 {

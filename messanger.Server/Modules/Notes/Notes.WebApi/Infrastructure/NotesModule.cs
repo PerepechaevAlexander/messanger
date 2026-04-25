@@ -1,5 +1,7 @@
-﻿using Core.WebApi.Infrastructure;
+﻿using Core.WebApi.Contracts;
+using Mapster;
 using Microsoft.Extensions.DependencyInjection;
+using Notes.Logic;
 using Notes.Logic.Contracts;
 using Notes.Logic.Repositories;
 using Notes.WebApi.Controllers;
@@ -15,6 +17,12 @@ public class NotesModule : IModule
     public void RegisterServices(IServiceCollection services)
     {
         services.AddScoped<INoteRepository, NoteRepository>();
+    }
+
+    /// <inheritdoc />
+    public void RegisterMapperConfig(TypeAdapterConfig typeAdapterConfig)
+    {
+        typeAdapterConfig.Apply(new NotesMapperRegister());
     }
 
     /// <inheritdoc />

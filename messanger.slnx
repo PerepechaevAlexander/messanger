@@ -5,17 +5,18 @@
     <File Path="docker-compose.yml" />
   </Folder>
   <Folder Name="/messanger.Server/">
-    <File Path=".dockerignore" />
     <Project Path="messanger.Server/Messanger.WebApi/Messanger.WebApi.csproj" Id="308d622d-7aad-49cf-a1f2-7c16198a3771" />
   </Folder>
   <Folder Name="/messanger.Server/Core/">
     <Project Path="messanger.Server/Core/Core.Data/Core.Data.csproj" />
+    <Project Path="messanger.Server/Core/Core.Dto/Core.Dto.csproj" Id="4f1a3a1c-7b03-4d41-a1f9-d4980ef56d7b" />
     <Project Path="messanger.Server/Core/Core.Logic/Core.Logic.csproj" />
     <Project Path="messanger.Server/core/Core.WebApi/Core.WebApi.csproj" />
   </Folder>
   <Folder Name="/messanger.Server/Modules/" />
   <Folder Name="/messanger.Server/Modules/Notes/">
     <Project Path="messanger.Server/Modules/Notes/Notes.Data/Notes.Data.csproj" />
+    <Project Path="messanger.Server/Modules/Notes/Notes.Dto/Notes.Dto.csproj" Id="d8274997-6de5-411a-b610-cbb6bc61ed6a" />
     <Project Path="messanger.Server/Modules/Notes/Notes.Logic/Notes.Logic.csproj" />
     <Project Path="messanger.Server/Modules/Notes/Notes.WebApi/Notes.WebApi.csproj" />
   </Folder>

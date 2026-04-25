@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Core\Core.WebApi\Core.WebApi.csproj" />
-    <ProjectReference Include="..\Notes.Logic\Notes.Logic.csproj" />
-  </ItemGroup>
-
 </Project>

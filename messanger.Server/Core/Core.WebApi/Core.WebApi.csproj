@@ -10,4 +10,12 @@
 	  <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Mapster" Version="10.0.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Logic\Core.Logic.csproj" />
+  </ItemGroup>
+
 </Project>

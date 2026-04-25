@@ -41,8 +41,29 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__Postgres=Host=db;Port=5432;Database=${DB_NAME};Username=${DB_USER};Password=${DB_PASSWORD}
+      - DOTNET_USE_POLLING_FILE_WATCHER=true
     volumes:
-      - ./messanger.Server:/src
+      - ./messanger.Server/Messanger.WebApi:/app/Messanger.WebApi:delegated
+      - ./messanger.Server/Modules:/app/Modules:delegated
+      - ./messanger.Server/Core:/app/Core:delegated
+      - /app/Messanger.WebApi/bin
+      - /app/Messanger.WebApi/obj
+      - /app/Core/Core.WebApi/bin
+      - /app/Core/Core.WebApi/obj
+      - /app/Core/Core.Logic/bin
+      - /app/Core/Core.Logic/obj
+      - /app/Core/Core.Data/bin
+      - /app/Core/Core.Data/obj
+      - /app/Core/Core.Dto/bin
+      - /app/Core/Core.Dto/obj
+      - /app/Modules/Notes/Notes.WebApi/bin
+      - /app/Modules/Notes/Notes.WebApi/obj
+      - /app/Modules/Notes/Notes.Logic/bin
+      - /app/Modules/Notes/Notes.Logic/obj
+      - /app/Modules/Notes/Notes.Data/bin
+      - /app/Modules/Notes/Notes.Data/obj
+      - /app/Modules/Notes/Notes.Dto/bin
+      - /app/Modules/Notes/Notes.Dto/obj
     depends_on:
       db:
         condition: service_healthy
